@@ -12,11 +12,13 @@ if (!ip) {
 const client = mqtt.connect("mqtt://" + ip);
 
 client.on('connect', function () {
+    console.log("Client connected. Subscribing to update topic.")
     client.subscribe('update');
     client.publish('update', 'Git commit message');
 });
 
 client.on('message', function (topic, message) {
+    console.log("Update request received");
     exec(['git', 'pull'], function (err, out, code) {
         if (err instanceof Error)
             throw err;
