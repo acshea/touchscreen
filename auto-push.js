@@ -11,7 +11,7 @@ var exec = require('exec');
 var client  = mqtt.connect("mqtt://" + ip);
 
  
-client.on('message', function (topic, message) {
+client.on('connect', function (topic, message) {
   // message is Buffer
     
     exec(['git', 'push'], function(err, out, code) {
